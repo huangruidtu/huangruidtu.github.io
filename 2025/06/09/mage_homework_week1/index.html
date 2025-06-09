@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Rui Huang">
+    
+    <title>
+        
+            马哥SRE 第一周作业(Deepseek generated) |
+        
+        Rui Huang
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://www.pokemon.cn/play/resources/pokedex/img/pm/0783062d0d860b8ae7d8e859241a700359c4d981.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"huangruidtu.github.io","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Rui Huang","author":"Rui Huang","avatar":"https://www.pokemon.cn/play/resources/pokedex/img/pm/0783062d0d860b8ae7d8e859241a700359c4d981.png","logo":"https://www.pokemon.cn/play/resources/pokedex/img/pm/0783062d0d860b8ae7d8e859241a700359c4d981.png","favicon":"https://www.pokemon.cn/play/resources/pokedex/img/pm/0783062d0d860b8ae7d8e859241a700359c4d981.png"},"menu":{"home":"/","archives":"/archives","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Ctrl + Alt + Solve","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/huangruidtu","linkedin":"https://www.linkedin.com/in/rui-huang-314a50168/"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="https://www.pokemon.cn/play/resources/pokedex/img/pm/0783062d0d860b8ae7d8e859241a700359c4d981.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Rui Huang
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                ABOUT
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+                <div class="post-content-top border-box"
+                     style="height: 13.8rem"
+                >
+                    <div class="cover-post-title">
+                        马哥SRE 第一周作业(Deepseek generated)
+                    </div>
+                    <img class="post-cover" src="https://www.digiboy.ir/wp-content/uploads/VmwareWorkstation-Pro17.0.jpg"
+                         onerror="this.style.display='none'"
+                    >
+                </div>
+            
+
+            <div class="post-content-bottom border-box has-cover">
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://www.pokemon.cn/play/resources/pokedex/img/pm/0783062d0d860b8ae7d8e859241a700359c4d981.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Rui Huang</span>
+                                
+                                    <span class="author-badge">Lv1</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-06-09 16:11:43</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Mon Jun 09 2025 16:11:43 GMT+0200">2025-06-09 16:11:43</span>
+                </span>
+            
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1>VMware 17 下载安装及虚拟机系统配置教程</h1>
+<h2 id="第一部分：VMware-Workstation-17-下载与安装">第一部分：VMware Workstation 17 下载与安装</h2>
+<h3 id="1-下载-VMware-Workstation-17">1. 下载 VMware Workstation 17</h3>
+<ol>
+<li>访问 VMware 官方网站：<a class="link"   target="_blank" rel="noopener" href="https://www.vmware.com" >https://www.vmware.com<i class="fas fa-external-link-alt"></i></a></li>
+<li>导航至&quot;产品&quot; &gt; “Workstation Pro”</li>
+<li>选择&quot;下载试用版&quot;或购买正式版</li>
+<li>根据您的操作系统选择 Windows 或 Linux 版本</li>
+</ol>
+<h3 id="2-安装-VMware-Workstation-17">2. 安装 VMware Workstation 17</h3>
+<ol>
+<li>双击下载的安装程序（如：VMware-workstation-full-17.x.x-xxxxxx.exe）</li>
+<li>接受许可协议</li>
+<li>选择安装位置（建议保持默认）</li>
+<li>勾选&quot;增强型键盘驱动程序&quot;（可选）</li>
+<li>点击&quot;安装&quot;按钮</li>
+<li>安装完成后点击&quot;完成&quot;</li>
+<li>首次运行时需要输入许可证密钥（试用版有30天试用期）</li>
+</ol>
+<h2 id="第二部分：在-VMware-中安装-Rocky-Linux-9-4">第二部分：在 VMware 中安装 Rocky Linux 9.4</h2>
+<h3 id="1-准备-Rocky-Linux-9-4-ISO-镜像">1. 准备 Rocky Linux 9.4 ISO 镜像</h3>
+<ol>
+<li>访问 Rocky Linux 官网：<a class="link"   target="_blank" rel="noopener" href="https://rockylinux.org" >https://rockylinux.org<i class="fas fa-external-link-alt"></i></a></li>
+<li>下载 Rocky Linux 9.4 ISO 镜像（选择适合的版本，如 Minimal ISO）</li>
+</ol>
+<h3 id="2-创建-Rocky-Linux-虚拟机">2. 创建 Rocky Linux 虚拟机</h3>
+<ol>
+<li>打开 VMware Workstation</li>
+<li>点击&quot;创建新的虚拟机&quot;</li>
+<li>选择&quot;典型(推荐)“，点击&quot;下一步”</li>
+<li>选择&quot;安装程序光盘映像文件(iso)&quot;，浏览选择下载的 Rocky Linux ISO</li>
+<li>设置虚拟机名称和位置</li>
+<li>指定磁盘容量（200GB），选择&quot;将虚拟磁盘拆分成多个文件&quot;</li>
+<li>点击&quot;完成&quot;开始创建虚拟机</li>
+</ol>
+<h3 id="3-安装-Rocky-Linux-9-4">3. 安装 Rocky Linux 9.4</h3>
+<ol>
+<li>启动虚拟机，进入安装界面</li>
+<li>选择&quot;Install Rocky Linux 9&quot;</li>
+<li>选择语言（如 English）</li>
+<li>配置安装目标（磁盘分区，建议使用自动分区）</li>
+<li>设置网络和主机名（建议启用网络）</li>
+<li>设置 root 密码和创建用户</li>
+<li>点击&quot;Begin Installation&quot;开始安装</li>
+<li>安装完成后重启</li>
+</ol>
+<h3 id="4-基本配置">4. 基本配置</h3>
+<ol>
+<li>登录系统</li>
+<li>更新系统：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf update -y</span><br></pre></td></tr></table></figure>
+</li>
+<li>安装常用工具：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install -y vim wget curl net-tools</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="第三部分：在-VMware-中安装-Ubuntu-24-04-1-桌面版">第三部分：在 VMware 中安装 Ubuntu 24.04.1 桌面版</h2>
+<h3 id="1-准备-Ubuntu-24-04-1-ISO-镜像">1. 准备 Ubuntu 24.04.1 ISO 镜像</h3>
+<ol>
+<li>访问 Ubuntu 官网：<a class="link"   target="_blank" rel="noopener" href="https://ubuntu.com/download/desktop" >https://ubuntu.com/download/desktop<i class="fas fa-external-link-alt"></i></a></li>
+<li>下载 Ubuntu 24.04.1 LTS 桌面版 ISO 镜像</li>
+</ol>
+<h3 id="2-创建-Ubuntu-虚拟机">2. 创建 Ubuntu 虚拟机</h3>
+<ol>
+<li>在 VMware 中点击&quot;创建新的虚拟机&quot;</li>
+<li>选择&quot;典型(推荐)“，点击&quot;下一步”</li>
+<li>选择&quot;安装程序光盘映像文件(iso)&quot;，浏览选择下载的 Ubuntu ISO</li>
+<li>设置虚拟机名称和位置</li>
+<li>指定磁盘容量（200GB），选择&quot;将虚拟磁盘拆分成多个文件&quot;</li>
+<li>点击&quot;完成&quot;开始创建虚拟机</li>
+</ol>
+<h3 id="3-安装-Ubuntu-24-04-1-桌面版">3. 安装 Ubuntu 24.04.1 桌面版</h3>
+<ol>
+<li>启动虚拟机，选择&quot;Install Ubuntu&quot;</li>
+<li>选择语言（如 English）</li>
+<li>选择键盘布局</li>
+<li>选择&quot;Normal installation&quot;并勾选&quot;Install third-party software&quot;</li>
+<li>选择安装类型（建议&quot;Erase disk and install Ubuntu&quot;）</li>
+<li>设置时区</li>
+<li>创建用户账户和密码</li>
+<li>点击&quot;Install Now&quot;开始安装</li>
+<li>安装完成后重启</li>
+</ol>
+<h3 id="4-基本配置-2">4. 基本配置</h3>
+<ol>
+<li>登录系统</li>
+<li>更新系统：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade -y</span><br></pre></td></tr></table></figure>
+</li>
+<li>安装 VMware Tools（增强功能）：
+<ul>
+<li>在 VMware 菜单选择&quot;虚拟机&quot; &gt; “安装 VMware Tools”</li>
+<li>在 Ubuntu 中挂载并安装 VMware Tools</li>
+</ul>
+</li>
+</ol>
+<h2 id="第四部分：配置-Ubuntu-24-04-1-远程访问">第四部分：配置 Ubuntu 24.04.1 远程访问</h2>
+<h3 id="1-启用-SSH-服务">1. 启用 SSH 服务</h3>
+<ol>
+<li>打开终端</li>
+<li>安装 OpenSSH 服务器：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openssh-server -y</span><br></pre></td></tr></table></figure>
+</li>
+<li>启动 SSH 服务：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start ssh</span><br></pre></td></tr></table></figure>
+</li>
+<li>设置开机自启：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable ssh</span><br></pre></td></tr></table></figure>
+</li>
+<li>检查服务状态：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status ssh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-配置网络（桥接模式或-NAT-端口转发）">2. 配置网络（桥接模式或 NAT 端口转发）</h3>
+<h4 id="选项1：桥接模式（推荐）">选项1：桥接模式（推荐）</h4>
+<ol>
+<li>关闭 Ubuntu 虚拟机</li>
+<li>在 VMware 中右键虚拟机 &gt; 设置 &gt; 网络适配器</li>
+<li>选择&quot;桥接模式&quot;并勾选&quot;复制物理网络连接状态&quot;</li>
+<li>启动虚拟机，Ubuntu 将获得与主机同网段的 IP</li>
+</ol>
+<h4 id="选项2：NAT-模式-端口转发">选项2：NAT 模式 + 端口转发</h4>
+<ol>
+<li>关闭 Ubuntu 虚拟机</li>
+<li>在 VMware 中点击&quot;编辑&quot; &gt; “虚拟网络编辑器”</li>
+<li>选择&quot;NAT 模式&quot;，点击&quot;NAT 设置&quot;</li>
+<li>添加端口转发规则（如：主机端口2222转发到虚拟机22端口）</li>
+<li>应用设置并启动虚拟机</li>
+</ol>
+<h3 id="3-获取-Ubuntu-IP-地址">3. 获取 Ubuntu IP 地址</h3>
+<p>在 Ubuntu 终端执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname -I</span><br></pre></td></tr></table></figure>
+<p>记下 IP 地址（通常是 ens33 或 eth0 接口的 inet 地址）</p>
+<h2 id="第五部分：使用-MobaXterm-远程登录-Ubuntu">第五部分：使用 MobaXterm 远程登录 Ubuntu</h2>
+<h3 id="1-下载安装-MobaXterm">1. 下载安装 MobaXterm</h3>
+<ol>
+<li>访问 MobaXterm 官网：<a class="link"   target="_blank" rel="noopener" href="https://mobaxterm.mobatek.net" >https://mobaxterm.mobatek.net<i class="fas fa-external-link-alt"></i></a></li>
+<li>下载 Portable 或 Installer 版本</li>
+<li>运行安装程序或解压便携版</li>
+</ol>
+<h3 id="2-配置-SSH-连接">2. 配置 SSH 连接</h3>
+<ol>
+<li>打开 MobaXterm</li>
+<li>点击&quot;Session&quot; &gt; “SSH”</li>
+<li>输入 Ubuntu 的 IP 地址（桥接模式直接使用虚拟机IP，NAT模式使用主机IP）
+<ul>
+<li>如果是 NAT 端口转发，端口填写2222（或你设置的其他端口）</li>
+</ul>
+</li>
+<li>输入 Ubuntu 用户名</li>
+<li>点击&quot;OK&quot;保存会话</li>
+</ol>
+<h3 id="3-首次连接">3. 首次连接</h3>
+<ol>
+<li>双击保存的会话</li>
+<li>首次连接会提示接受主机密钥，点击&quot;Yes&quot;</li>
+<li>输入用户密码</li>
+<li>成功登录后即可使用终端操作 Ubuntu 系统</li>
+</ol>
+<h3 id="4-高级功能">4. 高级功能</h3>
+<ol>
+<li><strong>文件传输</strong>：MobaXterm 左侧有文件浏览器，支持拖放上传下载</li>
+<li><strong>X11 转发</strong>：默认启用，可运行图形程序</li>
+<li><strong>多标签管理</strong>：可以同时打开多个 SSH 会话</li>
+<li><strong>保存密码</strong>（可选）：在会话设置中可以保存密码（安全性较低）</li>
+</ol>
+<h2 id="常见问题解决">常见问题解决</h2>
+<ol>
+<li>
+<p><strong>无法连接 SSH</strong>：</p>
+<ul>
+<li>检查 Ubuntu 防火墙：<code>sudo ufw status</code></li>
+<li>临时禁用防火墙：<code>sudo ufw disable</code></li>
+<li>或允许 SSH：<code>sudo ufw allow ssh</code></li>
+</ul>
+</li>
+<li>
+<p><strong>IP 地址变化</strong>：</p>
+<ul>
+<li>考虑在路由器中为虚拟机 MAC 地址分配静态 IP</li>
+<li>或在 Ubuntu 中配置静态 IP</li>
+</ul>
+</li>
+<li>
+<p><strong>性能优化</strong>：</p>
+<ul>
+<li>在 VMware 设置中分配更多 CPU 和内存资源</li>
+<li>安装 VMware Tools 增强性能</li>
+</ul>
+</li>
+</ol>
+<h1>Shell 总结：概念与常见类型</h1>
+<h2 id="一、什么是-Shell？">一、什么是 Shell？</h2>
+<p>Shell 是操作系统提供的用户界面，充当用户与操作系统内核（Kernel）之间的桥梁。它主要有两大功能：</p>
+<ol>
+<li><strong>命令解释器</strong>：接收用户输入的命令，解释并传递给内核执行</li>
+<li><strong>脚本环境</strong>：支持编写自动化脚本程序（Shell Script）</li>
+</ol>
+<h3 id="Shell-的核心作用：">Shell 的核心作用：</h3>
+<ul>
+<li>执行命令和程序</li>
+<li>管理文件和目录</li>
+<li>控制进程</li>
+<li>环境变量管理</li>
+<li>编程和自动化</li>
+</ul>
+<h2 id="二、Shell-的分类">二、Shell 的分类</h2>
+<h3 id="1-按交互方式分类">1. 按交互方式分类</h3>
+<ul>
+<li><strong>命令行 Shell</strong>（CLI）：如 Bash、Zsh</li>
+<li><strong>图形 Shell</strong>（GUI）：如 Windows Explorer、GNOME Shell</li>
+</ul>
+<h3 id="2-按功能特性分类">2. 按功能特性分类</h3>
+<ul>
+<li><strong>Bourne 系</strong>（sh 风格）：sh、bash、ksh、zsh</li>
+<li><strong>C 系</strong>（csh 风格）：csh、tcsh</li>
+</ul>
+<h2 id="三、常见-Shell-类型">三、常见 Shell 类型</h2>
+<table>
+<thead>
+<tr>
+<th>Shell 名称</th>
+<th>全称/含义</th>
+<th>特点</th>
+<th>常见系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>sh</strong></td>
+<td>Bourne Shell</td>
+<td>最古老的 Unix shell，所有 shell 的基础</td>
+<td>传统 Unix</td>
+</tr>
+<tr>
+<td><strong>bash</strong></td>
+<td>Bourne-Again Shell</td>
+<td>sh 的增强版，Linux 默认 shell</td>
+<td>Linux, macOS (2019前)</td>
+</tr>
+<tr>
+<td><strong>zsh</strong></td>
+<td>Z Shell</td>
+<td>强大的交互功能，支持插件和主题</td>
+<td>macOS (10.15+默认)</td>
+</tr>
+<tr>
+<td><strong>ksh</strong></td>
+<td>Korn Shell</td>
+<td>结合了 sh 和 csh 的优点</td>
+<td>AIX, HP-UX</td>
+</tr>
+<tr>
+<td><strong>csh</strong></td>
+<td>C Shell</td>
+<td>语法类似 C 语言</td>
+<td>BSD 系统</td>
+</tr>
+<tr>
+<td><strong>tcsh</strong></td>
+<td>TENEX C Shell</td>
+<td>csh 的增强版</td>
+<td>某些 BSD 系统</td>
+</tr>
+<tr>
+<td><strong>fish</strong></td>
+<td>Friendly Interactive Shell</td>
+<td>用户友好，自带语法高亮</td>
+<td>跨平台</td>
+</tr>
+<tr>
+<td><strong>dash</strong></td>
+<td>Debian Almquist Shell</td>
+<td>轻量级，速度快，适合脚本</td>
+<td>Debian/Ubuntu (脚本默认)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="四、主流-Shell-对比">四、主流 Shell 对比</h2>
+<ol>
+<li>
+<p><strong>bash</strong> (最流行)</p>
+<ul>
+<li>优点：功能全面，兼容性好，文档丰富</li>
+<li>缺点：配置复杂，启动速度较慢</li>
+</ul>
+</li>
+<li>
+<p><strong>zsh</strong> (现代选择)</p>
+<ul>
+<li>优点：强大的自动补全，主题支持，兼容 bash</li>
+<li>缺点：配置复杂（通常用 oh-my-zsh 管理）</li>
+</ul>
+</li>
+<li>
+<p><strong>fish</strong> (新手友好)</p>
+<ul>
+<li>优点：开箱即用，自动建议，彩色显示</li>
+<li>缺点：语法不兼容 bash</li>
+</ul>
+</li>
+<li>
+<p><strong>dash</strong> (高效脚本)</p>
+<ul>
+<li>优点：执行速度快，资源占用少</li>
+<li>缺点：交互功能弱</li>
+</ul>
+</li>
+</ol>
+<h2 id="五、如何查看和切换-Shell">五、如何查看和切换 Shell</h2>
+<ol>
+<li>
+<p>查看当前 Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>查看可用 Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/shells</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>临时切换 Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/zsh  <span class="comment"># 直接执行目标 shell</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>永久更改默认 Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh  <span class="comment"># 需要注销重新登录生效</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="六、Shell-的选择建议">六、Shell 的选择建议</h2>
+<ol>
+<li>
+<p><strong>日常交互使用</strong>：</p>
+<ul>
+<li>推荐 zsh（配合 oh-my-zsh）</li>
+<li>或 fish（适合不想折腾的用户）</li>
+</ul>
+</li>
+<li>
+<p><strong>编写可移植脚本</strong>：</p>
+<ul>
+<li>使用 bash（#!/bin/bash）</li>
+<li>或纯 sh（#!/bin/sh）保证最大兼容性</li>
+</ul>
+</li>
+<li>
+<p><strong>系统脚本</strong>：</p>
+<ul>
+<li>使用 sh 或 dash（#!/bin/sh）</li>
+</ul>
+</li>
+<li>
+<p><strong>资源受限环境</strong>：</p>
+<ul>
+<li>使用 ash、dash 等轻量级 shell</li>
+</ul>
+</li>
+</ol>
+<h1>Linux 常用基本命令用法总结（结合 <code>man</code> 命令）</h1>
+<h2 id="一、文件与目录操作">一、文件与目录操作</h2>
+<h3 id="1-ls-列出目录内容">1. <code>ls</code> - 列出目录内容</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">ls</span>  <span class="comment"># 查看完整帮助</span></span><br><span class="line"><span class="built_in">ls</span> [选项] [目录]</span><br></pre></td></tr></table></figure>
+<p>常用选项：</p>
+<ul>
+<li><code>-l</code> 长格式显示（权限、大小、时间）</li>
+<li><code>-a</code> 显示隐藏文件（以<code>.</code>开头）</li>
+<li><code>-h</code> 人类可读的文件大小（如 KB/MB）</li>
+<li><code>-t</code> 按修改时间排序</li>
+<li><code>-r</code> 反向排序</li>
+</ul>
+<h3 id="2-cd-切换目录">2. <code>cd</code> - 切换目录</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man bash  <span class="comment"># cd是shell内置命令</span></span><br><span class="line"><span class="built_in">cd</span> [目录路径]</span><br></pre></td></tr></table></figure>
+<p>特殊路径：</p>
+<ul>
+<li><code>cd ~</code> 返回家目录</li>
+<li><code>cd -</code> 返回上一个目录</li>
+<li><code>cd ..</code> 返回上级目录</li>
+</ul>
+<h3 id="3-pwd-显示当前目录">3. <code>pwd</code> - 显示当前目录</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">pwd</span></span><br><span class="line"><span class="built_in">pwd</span> [-P]  <span class="comment"># -P显示物理路径（非符号链接）</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-mkdir-创建目录">4. <code>mkdir</code> - 创建目录</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">mkdir</span></span><br><span class="line"><span class="built_in">mkdir</span> [选项] 目录名</span><br></pre></td></tr></table></figure>
+<p>常用选项：</p>
+<ul>
+<li><code>-p</code> 递归创建多级目录</li>
+<li><code>-m</code> 设置权限（如 <code>-m 755</code>）</li>
+</ul>
+<h3 id="5-rm-删除文件-目录">5. <code>rm</code> - 删除文件/目录</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">rm</span></span><br><span class="line"><span class="built_in">rm</span> [选项] 文件/目录</span><br></pre></td></tr></table></figure>
+<p>危险选项：</p>
+<ul>
+<li><code>-r</code> 递归删除（用于目录）</li>
+<li><code>-f</code> 强制删除（不提示）</li>
+<li><code>-i</code> 交互式删除（推荐新手使用）</li>
+</ul>
+<h2 id="二、文件操作">二、文件操作</h2>
+<h3 id="1-cp-复制文件">1. <code>cp</code> - 复制文件</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">cp</span></span><br><span class="line"><span class="built_in">cp</span> [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
+<p>常用选项：</p>
+<ul>
+<li><code>-r</code> 递归复制目录</li>
+<li><code>-i</code> 覆盖前提示</li>
+<li><code>-v</code> 显示复制过程</li>
+<li><code>-p</code> 保留文件属性</li>
+</ul>
+<h3 id="2-mv-移动-重命名文件">2. <code>mv</code> - 移动/重命名文件</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">mv</span></span><br><span class="line"><span class="built_in">mv</span> [选项] 源文件 目标文件/目录</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>可用于重命名：<code>mv oldname newname</code></li>
+<li><code>-i</code> 覆盖前提示</li>
+</ul>
+<h3 id="3-cat-查看文件内容">3. <code>cat</code> - 查看文件内容</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">cat</span></span><br><span class="line"><span class="built_in">cat</span> [选项] 文件名</span><br></pre></td></tr></table></figure>
+<p>常用组合：</p>
+<ul>
+<li><code>cat file1 file2 &gt; combined</code> 合并文件</li>
+<li><code>cat -n file</code> 显示行号</li>
+</ul>
+<h3 id="4-less-more-分页查看文件">4. <code>less</code>/<code>more</code> - 分页查看文件</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man less</span><br><span class="line">less 文件名</span><br></pre></td></tr></table></figure>
+<p>操作键：</p>
+<ul>
+<li>空格：下一页</li>
+<li>b：上一页</li>
+<li>/pattern：搜索</li>
+<li>q：退出</li>
+</ul>
+<h3 id="5-head-tail-查看文件开头-结尾">5. <code>head</code>/<code>tail</code> - 查看文件开头/结尾</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">head</span></span><br><span class="line"><span class="built_in">head</span> -n 10 file  <span class="comment"># 查看前10行</span></span><br><span class="line"><span class="built_in">tail</span> -f logfile  <span class="comment"># 实时查看日志（-f follow）</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、权限管理">三、权限管理</h2>
+<h3 id="1-chmod-修改权限">1. <code>chmod</code> - 修改权限</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">chmod</span></span><br><span class="line"><span class="built_in">chmod</span> [选项] 权限 文件</span><br></pre></td></tr></table></figure>
+<p>两种模式：</p>
+<ul>
+<li>数字模式：<code>chmod 755 file</code>（rwxr-xr-x）</li>
+<li>符号模式：<code>chmod u+x file</code>（给所有者增加执行权限）</li>
+</ul>
+<h3 id="2-chown-修改所有者">2. <code>chown</code> - 修改所有者</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">chown</span></span><br><span class="line"><span class="built_in">chown</span> [选项] 用户:组 文件</span><br></pre></td></tr></table></figure>
+<p>常用：</p>
+<ul>
+<li><code>chown user file</code></li>
+<li><code>chown :group file</code></li>
+<li><code>-R</code> 递归修改</li>
+</ul>
+<h2 id="四、系统信息">四、系统信息</h2>
+<h3 id="1-ps-查看进程">1. <code>ps</code> - 查看进程</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man ps</span><br><span class="line">ps [选项]</span><br></pre></td></tr></table></figure>
+<p>常用组合：</p>
+<ul>
+<li><code>ps aux</code> 查看所有进程</li>
+<li><code>ps -ef</code> 完整格式列表</li>
+<li><code>ps -u username</code> 查看指定用户进程</li>
+</ul>
+<h3 id="2-top-htop-动态进程查看">2. <code>top</code>/<code>htop</code> - 动态进程查看</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man top</span><br><span class="line">top</span><br></pre></td></tr></table></figure>
+<p>操作键：</p>
+<ul>
+<li>q：退出</li>
+<li>M：按内存排序</li>
+<li>P：按CPU排序</li>
+<li>k：杀死进程</li>
+</ul>
+<h3 id="3-df-磁盘空间">3. <code>df</code> - 磁盘空间</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">df</span></span><br><span class="line"><span class="built_in">df</span> -h  <span class="comment"># 人类可读格式</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-du-目录大小">4. <code>du</code> - 目录大小</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">du</span></span><br><span class="line"><span class="built_in">du</span> -sh 目录  <span class="comment"># 汇总大小</span></span><br><span class="line"><span class="built_in">du</span> -ah 目录  <span class="comment"># 显示所有文件大小</span></span><br></pre></td></tr></table></figure>
+<h2 id="五、网络相关">五、网络相关</h2>
+<h3 id="1-ping-测试网络连接">1. <code>ping</code> - 测试网络连接</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man ping</span><br><span class="line">ping 域名/IP</span><br></pre></td></tr></table></figure>
+<p>常用：</p>
+<ul>
+<li><code>-c 4</code> 发送4个包后停止</li>
+<li><code>-i 2</code> 每2秒发送一次</li>
+</ul>
+<h3 id="2-ifconfig-ip-网络接口">2. <code>ifconfig</code>/<code>ip</code> - 网络接口</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man ip</span><br><span class="line">ip addr show  <span class="comment"># 显示IP地址</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-netstat-ss-网络连接">3. <code>netstat</code>/<code>ss</code> - 网络连接</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man ss</span><br><span class="line">ss -tulnp  <span class="comment"># 查看监听端口</span></span><br></pre></td></tr></table></figure>
+<h2 id="六、搜索与查找">六、搜索与查找</h2>
+<h3 id="1-find-文件查找">1. <code>find</code> - 文件查找</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">man find</span><br><span class="line">find 路径 -name <span class="string">&quot;*.txt&quot;</span>  <span class="comment"># 按名称查找</span></span><br><span class="line">find / -size +10M       <span class="comment"># 查找大于10M的文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-grep-文本搜索">2. <code>grep</code> - 文本搜索</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man grep</span><br><span class="line">grep <span class="string">&quot;pattern&quot;</span> file</span><br></pre></td></tr></table></figure>
+<p>常用选项：</p>
+<ul>
+<li><code>-i</code> 忽略大小写</li>
+<li><code>-r</code> 递归搜索</li>
+<li><code>-n</code> 显示行号</li>
+<li><code>-v</code> 反向匹配</li>
+</ul>
+<h2 id="七、压缩解压">七、压缩解压</h2>
+<h3 id="1-tar-打包-解包">1. <code>tar</code> - 打包/解包</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">man tar</span><br><span class="line">tar -czvf archive.tar.gz <span class="built_in">dir</span>/  <span class="comment"># 压缩</span></span><br><span class="line">tar -xzvf archive.tar.gz       <span class="comment"># 解压</span></span><br></pre></td></tr></table></figure>
+<p>选项说明：</p>
+<ul>
+<li><code>-c</code> 创建</li>
+<li><code>-x</code> 解压</li>
+<li><code>-z</code> gzip压缩</li>
+<li><code>-v</code> 显示过程</li>
+<li><code>-f</code> 指定文件名</li>
+</ul>
+<h2 id="八、man-命令使用技巧">八、<code>man</code> 命令使用技巧</h2>
+<ol>
+<li>
+<p>基本用法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man 命令名</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>搜索手册：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man -k 关键词  <span class="comment"># 查找相关命令</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>导航：</p>
+<ul>
+<li>空格/PageDown：向下翻页</li>
+<li>PageUp：向上翻页</li>
+<li>/pattern：搜索（n下一个，N上一个）</li>
+<li>q：退出</li>
+</ul>
+</li>
+<li>
+<p>查看特定章节：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man 5 passwd  <span class="comment"># 查看passwd文件格式（第5章）</span></span><br></pre></td></tr></table></figure>
+<p>手册章节：</p>
+<ul>
+<li>1：用户命令</li>
+<li>5：文件格式</li>
+<li>8：管理员命令</li>
+</ul>
+</li>
+<li>
+<p>快速帮助：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">命令 --<span class="built_in">help</span>  <span class="comment"># 大多数命令支持的快速帮助</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>记住：遇到不熟悉的命令时，<code>man 命令名</code> 是最权威的参考资料！</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025/06/05/Hexo-Keep-Theme/"
+                                   title="How to use Keep Theme based on Hexo."
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">How to use Keep Theme based on Hexo.</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Rui Huang</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
