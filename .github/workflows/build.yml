@@ -1,20 +1,25 @@
 name: build
 
-# The site is plain HTML committed to the repository root and served by
-# GitHub Pages straight from `main`. This check fails when someone edits
-# src/ without rebuilding, so the committed HTML never drifts from source.
+# Builds the site from src/ and deploys it to GitHub Pages.
+# Pull requests only build (a check that the site still renders).
+# The contact email comes from the repository variable SITE_EMAIL, so it is
+# never stored in the repository itself.
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
-permissions:
-  contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,10 +27,22 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install -r src/requirements.txt
       - run: python src/build.py
-      - name: Committed HTML matches a fresh build
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git status --short
-            echo "::error::Generated files are stale. Run 'python3 src/build.py' and commit the result."
-            exit 1
-          fi
+        env:
+          SITE_EMAIL: ${{ vars.SITE_EMAIL }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

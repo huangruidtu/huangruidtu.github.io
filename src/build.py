@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 """Build the static site.
 
-Reads Markdown from src/content and writes plain HTML to the repository root,
-which GitHub Pages serves as-is (see .nojekyll).
+Reads Markdown from src/content and writes plain HTML to _site/. GitHub
+Actions runs this on every push to main and deploys _site/ to GitHub Pages
+(.github/workflows/build.yml). Nothing generated is committed.
 
     python3 -m pip install -r src/requirements.txt
-    python3 src/build.py
+    SITE_EMAIL=you@example.com python3 src/build.py    # email is optional
 
-Only the paths listed in GENERATED are deleted and rewritten, so nothing else
-in the repository root is ever touched.
+The contact email is never stored in the repository. It comes from the
+SITE_EMAIL environment variable (a repository variable in CI). Without it,
+the site builds fine and simply shows no email link.
 """
 
 from __future__ import annotations
 
 import datetime as dt
 import html
+import os
 import re
 import shutil
 import sys
@@ -30,34 +33,51 @@ from pygments.formatters import HtmlFormatter
 SITE = {
     "url": "https://huangruidtu.github.io",
     "title": "Rui Huang",
-    "tagline": "Notes on platforms, data, and the things in between.",
-    "subline": "From segmentation fault to service not found.",
-    "description": "Rui Huang's notes on platforms, data, and the things in between.",
+    "tagline": "Platform and data engineer in Copenhagen. I build the plumbing between "
+               "“something happened” and “someone can act on it”: platforms, "
+               "pipelines, and the alerts for when either breaks.",
+    "subline": "Started in kernel space; now I live in the control plane.",
+    "description": "Rui Huang, platform and data engineer in Copenhagen. Notes on "
+                   "platforms, data pipelines, and what happens when they break.",
     "author": "Rui Huang",
     "motto": "Ctrl + Alt + Solve",
     "since": 2020,
     "links": [
         ("GitHub", "https://github.com/huangruidtu"),
         ("LinkedIn", "https://www.linkedin.com/in/rui-huang-314a50168/"),
-        ("Email", "mailto:huangruitjut@gmail.com"),
     ],
 }
 
 SRC = Path(__file__).resolve().parent
 ROOT = SRC.parent
+OUT = ROOT / "_site"
 CONTENT = SRC / "content"
 STATIC = SRC / "static"
-
-# Everything the build owns in the repository root. Nothing else is deleted.
-GENERATED = ["index.html", "404.html", "atom.xml", "sitemap.xml", "robots.txt",
-             "posts", "about", "assets"]
 
 MD_EXTENSIONS = ["fenced_code", "tables", "sane_lists", "codehilite", "toc"]
 MD_CONFIG = {
     "codehilite": {"css_class": "highlight", "guess_lang": False},
-    # slugify_unicode keeps CJK characters, so Chinese headings get readable anchors
+    # slugify_unicode keeps non-ASCII characters, so every heading gets a readable anchor
     "toc": {"permalink": "#", "permalink_title": "Link to this section", "slugify": slugify_unicode},
 }
+
+# ---------------------------------------------------------------- contact
+
+
+def site_email() -> str:
+    addr = os.environ.get("SITE_EMAIL", "").strip()
+    if addr and not re.fullmatch(r"[^@\s<>()\[\]\"']+@[^@\s<>()\[\]\"']+\.[A-Za-z]{2,}", addr):
+        sys.exit("SITE_EMAIL does not look like an email address")
+    return addr
+
+
+def contact_links(*, show_address: bool) -> list[tuple[str, str]]:
+    """GitHub, LinkedIn and, when SITE_EMAIL is set, a mailto link."""
+    links = list(SITE["links"])
+    addr = site_email()
+    if addr:
+        links.append((addr if show_address else "Email", f"mailto:{addr}"))
+    return links
 
 # ---------------------------------------------------------------- content
 
@@ -98,6 +118,9 @@ def parse_front_matter(text: str, path: Path) -> tuple[dict, str]:
 
 
 def render_markdown(body: str) -> str:
+    # `{{contact}}` in any page expands to the contact links.
+    contact = " · ".join(f"[{name}]({url})" for name, url in contact_links(show_address=True))
+    body = body.replace("{{contact}}", contact)
     return markdown.markdown(body, extensions=MD_EXTENSIONS,
                              extension_configs=MD_CONFIG, output_format="html")
 
@@ -198,7 +221,8 @@ def fmt_date(d: dt.date) -> str:
 
 
 def render_home(posts: list[Page]) -> str:
-    links = "".join(f'<a href="{e(url)}">{e(name)}</a>' for name, url in SITE["links"])
+    links = "".join(f'<a href="{e(url)}">{e(name)}</a>'
+                    for name, url in contact_links(show_address=False))
     items = []
     for p in posts:
         meta = fmt_date(p.date)
@@ -323,7 +347,7 @@ def render_sitemap(urls: list[str]) -> str:
 
 
 def write(rel: str, text: str) -> None:
-    out = ROOT / rel
+    out = OUT / rel
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(text, encoding="utf-8")
 
@@ -339,24 +363,17 @@ def pygments_css() -> str:
            f"@media (prefers-color-scheme: dark) {{\n{dark}\n}}\n"
 
 
-def clean() -> None:
-    for name in GENERATED:
-        target = ROOT / name
-        if target.is_dir():
-            shutil.rmtree(target)
-        elif target.exists():
-            target.unlink()
-
-
 def build() -> None:
     posts = load_posts()
     about = load_page(CONTENT / "about.md", is_post=False)
     SITE["year"] = max([SITE["since"]] + [p.date.year for p in posts])
 
-    clean()
+    # _site/ belongs entirely to the build, so it is safe to start from empty.
+    if OUT.exists():
+        shutil.rmtree(OUT)
 
-    assets = ROOT / "assets"
-    assets.mkdir()
+    assets = OUT / "assets"
+    assets.mkdir(parents=True)
     for f in STATIC.iterdir():
         if f.is_file():
             shutil.copy2(f, assets / f.name)
@@ -372,7 +389,7 @@ def build() -> None:
     write("sitemap.xml", render_sitemap(["/", "/about/"] + [p.url for p in posts]))
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE['url']}/sitemap.xml\n")
 
-    print(f"built {len(posts)} post(s) -> {ROOT}")
+    print(f"built {len(posts)} post(s) -> {OUT}")
 
 
 if __name__ == "__main__":
