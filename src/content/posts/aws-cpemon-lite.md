@@ -79,4 +79,4 @@ Running everything myself taught me what each layer costs to operate. Running no
 
 ## Next
 
-Next is the CPEmon cloud platform upgrade: the original MVP taken to EKS with Terraform, GitOps and Kafka, and what happens when one repository tries to hold all of it.
+Next is [the CPEmon cloud platform upgrade](/posts/cpemon-eks-upgrade/): the original MVP taken to EKS with Terraform, GitOps and Kafka, and what happens when one repository tries to hold all of it.
