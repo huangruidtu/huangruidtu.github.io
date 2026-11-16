@@ -1,6 +1,6 @@
 ---
 title: A multi-source data pipeline, hybrid and AWS-native
-date: 2026-11-16
+date: 2026-11-07
 summary: Batch and CDC pipelines for commerce and operations data, built first on open-source engines with a SaaS warehouse, then again on AWS. Most of the work went into one question: when two records disagree, which one is true?
 series: Project retrospectives
 series_part: 6

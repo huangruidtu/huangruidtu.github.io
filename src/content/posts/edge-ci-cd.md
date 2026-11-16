@@ -1,6 +1,6 @@
 ---
 title: An edge CI/CD retrospective
-date: 2026-11-16
+date: 2026-03-23
 summary: My first attempt at treating delivery as one whole problem: layered DevSecOps checks, a self-hosted runner inside a private LAN, versioned artifacts in S3, and a manual rollback.
 series: Project retrospectives
 series_part: 1

@@ -1,6 +1,6 @@
 ---
 title: Migrating a lab Kubernetes platform to EKS
-date: 2026-11-16
+date: 2026-06-28
 summary: The MVP's shortcuts, reversed one at a time: Terraform, Helm and Argo CD, Kafka instead of a database queue, externalized secrets, policies and cost visibility. Then it outgrew its repository.
 series: Project retrospectives
 series_part: 4

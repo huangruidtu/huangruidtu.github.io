@@ -1,6 +1,6 @@
 ---
 title: Pulling the platform out of the application
-date: 2026-11-16
+date: 2026-10-20
 summary: After the EKS upgrade outgrew its repository, I split the platform into its own: decide who owns what first, then pick the tools. The interface a team sees is three small resources.
 series: Project retrospectives
 series_part: 5

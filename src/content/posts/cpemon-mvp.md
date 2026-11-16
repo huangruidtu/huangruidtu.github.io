@@ -1,6 +1,6 @@
 ---
 title: A telemetry platform on a cluster I ran myself
-date: 2026-11-16
+date: 2025-11-28
 summary: A CPE monitoring platform built end to end on a self-managed Kubernetes lab, with every shortcut written down and failures rehearsed on purpose.
 series: Project retrospectives
 series_part: 2

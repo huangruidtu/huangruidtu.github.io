@@ -1,6 +1,6 @@
 ---
 title: The same telemetry platform on AWS managed services
-date: 2026-11-16
+date: 2026-03-28
 summary: The CPE monitoring problem again, with the opposite constraint: nothing to run myself. The services were the easy part; deciding which signals deserve an alarm was not.
 series: Project retrospectives
 series_part: 3
