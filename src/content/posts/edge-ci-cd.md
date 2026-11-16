@@ -83,7 +83,8 @@ push / PR / tag --> GitHub-hosted runner
 
 tag --------------> self-hosted runner (inside the LAN)
                     build versioned binary -> upload to S3
-                    -> download from S3 -> scp to board -> stop.sh / start.sh
+                    -> download from S3 -> scp to board
+                    -> stop.sh / start.sh
 ```
 
 The S3 bucket in the middle matters. Every release lands at:
@@ -136,4 +137,4 @@ And, looking back:
 
 ## Next
 
-Next is the first version of CPEmon: a lab-scale monitoring platform for home routers (CPEs), modelled on the kind of telecom system I work on, running on a Kubernetes cluster I operated myself. It was my first real look at what "you operate everything" means.
+Next is [the first version of CPEmon](/posts/cpemon-mvp/): a lab-scale monitoring platform for home routers (CPEs) on a Kubernetes cluster I ran myself. It was my first real look at what "you operate everything" means.

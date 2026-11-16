@@ -103,7 +103,8 @@ Fix: restore CI
 
 tag --------------&gt; self-hosted runner (inside the LAN)
                     build versioned binary -&gt; upload to S3
-                    -&gt; download from S3 -&gt; scp to board -&gt; stop.sh / start.sh
+                    -&gt; download from S3 -&gt; scp to board
+                    -&gt; stop.sh / start.sh
 </code></pre></div>
 
 <p>The S3 bucket in the middle matters. Every release lands at:</p>
@@ -143,12 +144,12 @@ tag --------------&gt; self-hosted runner (inside the LAN)
 <li>Deployment ends as soon as <code>start.sh</code> runs. There's no post-deploy health check, and without one there's no safe automatic rollback.</li>
 </ul>
 <h2 id="next">Next<a class="headerlink" href="#next" title="Link to this section">#</a></h2>
-<p>Next is the first version of CPEmon: a lab-scale monitoring platform for home routers (CPEs), modelled on the kind of telecom system I work on, running on a Kubernetes cluster I operated myself. It was my first real look at what "you operate everything" means.</p>
+<p>Next is <a href="/posts/cpemon-mvp/">the first version of CPEmon</a>: a lab-scale monitoring platform for home routers (CPEs) on a Kubernetes cluster I ran myself. It was my first real look at what "you operate everything" means.</p>
 </div>
 </article>
 <aside class="series">
 <div class="label">Series: Project retrospectives</div>
-<ol><li class="current">Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective</li></ol>
+<ol><li class="current">Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective</li><li><a href="/posts/cpemon-mvp/">Build it, break it, bring it back: a telemetry platform on a cluster I ran myself</a></li></ol>
 </aside>
 <div class="post-footer"><a href="/">&larr; All posts</a></div>
 </main>

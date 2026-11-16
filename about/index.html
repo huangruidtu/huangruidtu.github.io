@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About · Rui Huang</title>
-<meta name="description" content="Rui Huang is a platform engineer in Copenhagen working on Kubernetes and AWS. Before that, Linux kernel drivers and embedded firmware.">
+<meta name="description" content="Rui Huang is a platform and data engineer in Copenhagen. Platforms, pipelines, and the alerts for when either breaks.">
 <meta name="author" content="Rui Huang">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://huangruidtu.github.io/about/">
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/assets/style.css">
 <meta property="og:site_name" content="Rui Huang">
 <meta property="og:title" content="About">
-<meta property="og:description" content="Rui Huang is a platform engineer in Copenhagen working on Kubernetes and AWS. Before that, Linux kernel drivers and embedded firmware.">
+<meta property="og:description" content="Rui Huang is a platform and data engineer in Copenhagen. Platforms, pipelines, and the alerts for when either breaks.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://huangruidtu.github.io/about/">
 <meta property="og:image" content="https://huangruidtu.github.io/assets/psyduck-512.jpg">
@@ -30,15 +30,22 @@
 <article>
 <header class="post-header"><h1>About</h1></header>
 <div class="prose">
-<p>I'm Rui, a platform engineer in Copenhagen.</p>
-<p>At Nuuday I work on CPEmon, the platform YouSee uses to monitor and manage more than a million broadband devices. That means services on Kubernetes and AWS, a telemetry path built on Kafka and ClickHouse (I also contribute to the Rust-based Linux agents that collect the data), and the Prometheus, Grafana and Loki setup that tells us when something is off. Plus the on-call that comes with it.</p>
-<p>I got here the long way round: nearly three years of Linux kernel drivers for Xiaomi phones in Beijing, then an MSc in Computer Science and Engineering at DTU, with a stint on Bluetooth LE firmware at Oticon along the way. From <code>segmentation fault</code> to <code>service not found</code>.</p>
-<p>I hold the CKA and the AWS Certified Solutions Architect – Associate.</p>
+<p>I'm Rui, a platform and data engineer in Copenhagen.</p>
+<p>Most of what I do sits between “something happened” and “someone can act on it”. Devices, services and databases emit a constant stream of events. My job is getting that stream somewhere useful, keeping it correct on the way, and keeping the platform underneath it boring. Device telemetry, business analytics, CI/CD: it's the same shape of problem every time, just with different nouns.</p>
+<p>I got here the long way round: Linux kernel drivers for smartphones, then an MSc in Computer Science and Engineering at DTU (with some Bluetooth firmware for hearing-aid accessories on the side), then infrastructure. From <code>segmentation fault</code> to <code>service not found</code>, with the occasional <code>consumer lag</code> these days.</p>
+<p>Officially certified, too: CKA and AWS Certified Solutions Architect – Associate.</p>
+<h2 id="what-i-reach-for">What I reach for<a class="headerlink" href="#what-i-reach-for" title="Link to this section">#</a></h2>
+<ul>
+<li><strong>Keeping platforms up:</strong> Kubernetes, Terraform, Helm, Argo CD, and a lot of AWS</li>
+<li><strong>Moving data around:</strong> Kafka, ClickHouse, Airflow, Spark, Flink, Debezium, dbt, Snowflake</li>
+<li><strong>Finding out why it broke:</strong> Prometheus, Grafana, Loki, and the ELK stack</li>
+<li><strong>Writing the actual code:</strong> Go, Python, Rust, C, and more Bash than I'd like to admit</li>
+</ul>
 <h2 id="whats-on-this-site">What's on this site<a class="headerlink" href="#whats-on-this-site" title="Link to this section">#</a></h2>
 <p>I build side projects to try ideas end to end, then write up how they went: what I built, why it ended up that way, and what I'd change. Roughly in the order my thinking evolved:</p>
 <ul>
 <li><strong><a href="https://github.com/huangruidtu/edge-ci-cd-demo">edge-ci-cd-demo</a></strong>: CI/CD for a C++ app on an ARM board in a private LAN. Layered DevSecOps checks, versioned binaries in S3, delivery through a self-hosted runner, manual rollback. <a href="/posts/edge-ci-cd/">Write-up</a>.</li>
-<li><strong><a href="https://github.com/huangruidtu/cpemon-mvp">cpemon-mvp</a></strong>: a lab-scale version of a CPE monitoring platform on a self-managed Kubernetes cluster. Go services, MySQL-backed queues, Prometheus and Grafana, Elasticsearch and Kibana, Velero for backup and restore.</li>
+<li><strong><a href="https://github.com/huangruidtu/cpemon-mvp">cpemon-mvp</a></strong>: a telemetry platform for home routers (CPEs) on a Kubernetes cluster I ran myself. Go services, a MySQL-backed queue, Prometheus and Grafana, Elasticsearch and Kibana, Velero for backup and restore. <a href="/posts/cpemon-mvp/">Write-up</a>.</li>
 <li><strong><a href="https://github.com/huangruidtu/aws-cpemon-lite">aws-cpemon-lite</a></strong>: the same problem built only from AWS managed services: API Gateway, Lambda, DynamoDB, S3, CloudWatch alarms and SNS, with a small cost guardrail.</li>
 <li><strong><a href="https://github.com/huangruidtu/cpemon-mvp/tree/codex/cpemon-cloud-platform-upgrade">CPEmon cloud platform upgrade</a></strong>: the MVP moved to EKS with Terraform, Helm, Kafka, Argo CD, External Secrets, Kyverno, OpenCost and Crossplane.</li>
 <li><strong><a href="https://github.com/huangruidtu/Muztagh-Developer-Platform">Muztagh Developer Platform</a></strong>: the platform pieces pulled out of that upgrade into a central internal developer platform. Terraform owns the foundation, Crossplane exposes <code>Workspace</code>, <code>Application</code> and <code>DataStore</code> contracts, and CPEmon is the first tenant.</li>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build it, break it, bring it back: a telemetry platform on a cluster I ran myself · Rui Huang</title>
+<meta name="description" content="A CPE monitoring platform built end to end on a self-managed Kubernetes lab: every layer mine, every shortcut written down, and every failure rehearsed on purpose.">
+<meta name="author" content="Rui Huang">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://huangruidtu.github.io/posts/cpemon-mvp/">
+<link rel="alternate" type="application/atom+xml" title="Rui Huang" href="/atom.xml">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/style.css">
+<meta property="og:site_name" content="Rui Huang">
+<meta property="og:title" content="Build it, break it, bring it back: a telemetry platform on a cluster I ran myself">
+<meta property="og:description" content="A CPE monitoring platform built end to end on a self-managed Kubernetes lab: every layer mine, every shortcut written down, and every failure rehearsed on purpose.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huangruidtu.github.io/posts/cpemon-mvp/">
+<meta property="og:image" content="https://huangruidtu.github.io/assets/psyduck-512.jpg">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<div class="wrap">
+<header class="topbar">
+<a class="home" href="/"><img src="/assets/psyduck-192.jpg" alt="" width="32" height="32">Rui Huang</a>
+<nav><a href="/">Writing</a><a href="/about/">About</a></nav>
+</header>
+<main>
+<article>
+<header class="post-header">
+<h1>Build it, break it, bring it back: a telemetry platform on a cluster I ran myself</h1>
+<div class="meta"><time datetime="2026-11-16">Nov 16, 2026 · Project retrospectives · Part 2</time></div>
+</header>
+<div class="prose">
+<blockquote>
+<p>Part 2 of a series of project retrospectives. One post per project, roughly in the order my thinking evolved: what I built, why it ended up that way, and what I'd do differently.</p>
+<p>Code: <a href="https://github.com/huangruidtu/cpemon-mvp">huangruidtu/cpemon-mvp</a></p>
+</blockquote>
+<p><strong>TL;DR:</strong> A lab-scale monitoring platform for home routers (CPEs), built end to end on a two-node kubeadm cluster. Simulated devices and a TR-069 server (GenieACS) feed three Go services; MySQL holds the state and doubles as a queue; Prometheus, Grafana, Elasticsearch and Kibana watch it; Velero backs it up. Six decision records explain every shortcut, and the demos break things on purpose and bring them back.</p>
+<h2 id="why-build-it">Why build it<a class="headerlink" href="#why-build-it" title="Link to this section">#</a></h2>
+<p>A telemetry platform looks simple from the outside: devices send data, a dashboard shows it. Everything interesting happens in between, and on a large system you usually see only a slice of it.</p>
+<p>I wanted the whole loop in my hands, small enough to hold in my head: from a heartbeat leaving a device, through ingress, services, a queue and a database, to a dashboard, a log search, a backup, and a runbook for when it goes wrong. Almost nothing was managed for me. Apart from a container registry and an S3 bucket for backups, everything ran on machines I set up. If something broke, it was mine to find.</p>
+<p>The rule I set for the documentation said the same thing from the reader's side: someone with basic Kubernetes knowledge should be able to go from zero to "I can deploy and run this" using only the README, and follow the data the whole way.</p>
+<h2 id="the-shape-of-it">The shape of it<a class="headerlink" href="#the-shape-of-it" title="Link to this section">#</a></h2>
+<div class="highlight"><pre><span></span><code>outside the cluster (vm3)      Kubernetes: 1 control plane + 1 worker
+-------------------------      --------------------------------------
+CPE simulators --heartbeat--&gt;  cpemon-api     --&gt; cpe_status, history
+GenieACS ------webhook------&gt;  acs-ingest     --&gt; ingest_events (queue)
+                               cpemon-writer  &lt;-- polls the queue
+
+Prometheus + Grafana     metrics from every service
+Filebeat + ES + Kibana   logs
+Velero + MinIO/S3        namespace backups, MySQL dumps
+</code></pre></div>
+
+<p>Three Go services do the work. <code>cpemon-api</code> takes heartbeats and serves the read APIs and a small admin UI. <code>acs-ingest</code> receives webhooks from the ACS. <code>cpemon-writer</code> drains the queue. Everything enters through ingress-nginx, and MetalLB gives the bare-metal cluster a real <code>LoadBalancer</code> IP for it.</p>
+<h2 id="the-world-doesnt-start-at-kubernetes">The world doesn't start at Kubernetes<a class="headerlink" href="#the-world-doesnt-start-at-kubernetes" title="Link to this section">#</a></h2>
+<p>The first real decision was where <em>not</em> to put things. GenieACS and the device simulators run on a separate VM, outside the cluster, and talk to it only through ingress, the way an existing system would.</p>
+<p>Putting everything in the cluster would have been tidier. But in telecom, the ACS and the systems around it usually already exist, and a new monitoring layer has to plug into them rather than replace them. The decision record puts it in one line:</p>
+<blockquote>
+<p>I didn't pretend the world starts at Kubernetes.</p>
+</blockquote>
+<h2 id="six-shortcuts-written-down">Six shortcuts, written down<a class="headerlink" href="#six-shortcuts-written-down" title="Link to this section">#</a></h2>
+<p>The lab had two small nodes and one extra VM. That forced shortcuts everywhere, so I wrote each one down as an architecture decision record (ADR): what I chose, what I gave up, and what I'd do at real scale.</p>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>What I gave up</th>
+<th>At real scale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 control plane + 1 worker, 2 replicas per critical service</td>
+<td>Surviving a control-plane failure</td>
+<td>Multiple control-plane nodes, workers across zones</td>
+</tr>
+<tr>
+<td>MySQL as the only primary store</td>
+<td>Separate operational and analytical stores</td>
+<td>Specialized stores per workload</td>
+</tr>
+<tr>
+<td>A queue in MySQL instead of Kafka</td>
+<td>Partitions, consumer groups, replay</td>
+<td>Kafka between ingest and processing</td>
+</tr>
+<tr>
+<td>Single-node Elasticsearch</td>
+<td>Log availability</td>
+<td>A multi-node cluster with lifecycle policies</td>
+</tr>
+<tr>
+<td>Plain YAML instead of Helm</td>
+<td>DRY manifests, multiple environments</td>
+<td>Helm or Kustomize, plus GitOps</td>
+</tr>
+<tr>
+<td>ACS and devices on an external VM</td>
+<td>A one-command bring-up</td>
+<td>Keep it: real networks look like this</td>
+</tr>
+</tbody>
+</table>
+<p>Every record ends with how the decision would evolve. That turned out to matter: in the later CPEmon upgrade, Kafka replaces the database queue and Helm replaces the plain YAML.</p>
+<h2 id="a-queue-in-a-database">A queue in a database<a class="headerlink" href="#a-queue-in-a-database" title="Link to this section">#</a></h2>
+<p>The most interesting shortcut is the queue. Kafka would have been the natural choice, but on a two-node lab it would have doubled the moving parts for demo-level traffic. So ACS events go into a MySQL table instead:</p>
+<ul>
+<li><strong>Idempotent enqueue.</strong> A unique key on <code>(sn, event_ts)</code> plus <code>ON DUPLICATE KEY UPDATE</code> means a webhook delivered twice is stored once.</li>
+<li><strong>Claiming work.</strong> The writer claims an event with a conditional update, <code>status = 'processing' WHERE id = ? AND status = 'queued'</code>. If no row changed, another writer got there first.</li>
+<li><strong>Retries and dead letters.</strong> Each row has <code>attempts</code>, <code>next_at</code>, and a <code>dead</code> state, with exponential backoff from 5 seconds up to 5 minutes and five attempts before giving up.</li>
+</ul>
+<p>Webhooks are signed with HMAC-SHA256 and compared in constant time. Every failure path increments a labeled Prometheus counter (<code>invalid_json</code>, <code>missing_sn</code>, <code>invalid_signature</code>), so the dashboard shows <em>why</em> requests fail, not just that they do.</p>
+<h2 id="break-it-on-purpose">Break it on purpose<a class="headerlink" href="#break-it-on-purpose" title="Link to this section">#</a></h2>
+<p>The part I'm happiest with is that failure is part of the demo, not something I hope doesn't happen during it.</p>
+<ul>
+<li><strong>Drain a node.</strong> <code>cpemon-api</code> and <code>acs-ingest</code> run two replicas, spread across both nodes with affinity, tolerations and a PodDisruptionBudget. Draining the worker while a loop polls <code>/healthz</code> shows the API keeps answering.</li>
+<li><strong>Delete the API.</strong> A Velero script backs up the namespace, deletes the <code>cpemon-api</code> Deployment, Service and Ingress, restores them, and runs the smoke test again.</li>
+<li><strong>Write the runbooks.</strong> Three incident runbooks cover a queue backlog, Elasticsearch running out of disk, and a MySQL connection spike, each with impact, likely causes, a diagnostics checklist and immediate actions.</li>
+</ul>
+<p>Security got the same layered treatment: the admin UI sits behind Basic Auth <em>and</em> an ingress IP allowlist, and Calico network policies default-deny egress in the namespace, so only the core services can reach MySQL, Prometheus and Elasticsearch.</p>
+<p>The admin UI ties it together for an operator: search a device by serial number, see its current state and history, then jump to its metrics in Grafana and its logs in Kibana. A device ID to the evidence in a few clicks.</p>
+<h2 id="where-the-mvp-stopped">Where the MVP stopped<a class="headerlink" href="#where-the-mvp-stopped" title="Link to this section">#</a></h2>
+<p>In the spirit of saying what was proven and what wasn't:</p>
+<ul>
+<li>The writer's retry and dead-letter path is modeled in the schema and the code, but in the MVP the writer only claims and acknowledges events. Heartbeats are written straight to the state tables by <code>cpemon-api</code>.</li>
+<li>Signature checks run only when a webhook carries a signature header. Unsigned requests are still accepted, which was convenient during development and is not something to keep.</li>
+</ul>
+<h2 id="what-it-taught-me">What it taught me<a class="headerlink" href="#what-it-taught-me" title="Link to this section">#</a></h2>
+<p>Running every layer myself was the fastest way to learn what each layer costs. Elasticsearch needs disk and attention. A database queue works until it doesn't. A single control plane is a single point of failure whatever the replica count says.</p>
+<p>It also made the next question obvious: how much of this would I still want to run myself if I didn't have to?</p>
+<h2 id="next">Next<a class="headerlink" href="#next" title="Link to this section">#</a></h2>
+<p>Next is the same problem with the opposite constraint: no servers at all, only AWS managed services.</p>
+</div>
+</article>
+<aside class="series">
+<div class="label">Series: Project retrospectives</div>
+<ol><li><a href="/posts/edge-ci-cd/">Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective</a></li><li class="current">Build it, break it, bring it back: a telemetry platform on a cluster I ran myself</li></ol>
+</aside>
+<div class="post-footer"><a href="/">&larr; All posts</a></div>
+</main>
+<footer class="site-footer">
+<span>&copy; 2020–2026 Rui Huang</span>
+<span class="motto">Ctrl + Alt + Solve</span>
+</footer>
+</div>
+</body>
+</html>
