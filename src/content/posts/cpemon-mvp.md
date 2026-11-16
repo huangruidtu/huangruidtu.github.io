@@ -89,4 +89,4 @@ It also made the next question obvious: how much of this would I still want to r
 
 ## Next
 
-Next is the same problem with the opposite constraint: no servers at all, only AWS managed services.
+Next is [the same problem with the opposite constraint](/posts/aws-cpemon-lite/): no servers at all, only AWS managed services.

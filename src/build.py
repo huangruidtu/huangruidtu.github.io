@@ -390,6 +390,8 @@ def build() -> None:
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE['url']}/sitemap.xml\n")
 
     print(f"built {len(posts)} post(s) -> {OUT}")
+    # Report only whether the address is set, never the address itself.
+    print(f"contact email: {'set' if site_email() else 'not set (no email link)'}")
 
 
 if __name__ == "__main__":
