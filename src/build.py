@@ -30,9 +30,11 @@ from pygments.formatters import HtmlFormatter
 SITE = {
     "url": "https://huangruidtu.github.io",
     "title": "Rui Huang",
-    "tagline": "Notes on SRE, platform engineering and data infrastructure.",
-    "subline": "From segmentation fault to service not found.",
-    "description": "Rui Huang's notes on SRE, platform engineering and data infrastructure.",
+    "tagline": "Platform engineer in Copenhagen. I work on the Kubernetes and AWS "
+               "platform that monitors over a million broadband devices.",
+    "subline": "Started in kernel space; now I live in the control plane.",
+    "description": "Rui Huang, platform engineer in Copenhagen. Writing about Kubernetes, "
+                   "AWS, delivery pipelines and data platforms.",
     "author": "Rui Huang",
     "motto": "Ctrl + Alt + Solve",
     "since": 2020,
@@ -134,7 +136,7 @@ e = html.escape
 
 
 def layout(*, title: str, description: str, path: str, body: str,
-           lang: str = "zh-CN", og_type: str = "website") -> str:
+           lang: str = "en", og_type: str = "website") -> str:
     full_title = title if title == SITE["title"] else f"{title} · {SITE['title']}"
     canonical = SITE["url"] + path
     image = SITE["url"] + "/assets/psyduck-512.jpg"
@@ -188,12 +190,17 @@ def topbar(current: str = "") -> str:
 </header>"""
 
 
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
 def fmt_date(d: dt.date) -> str:
-    return d.isoformat()
+    # Spelled out by hand so the output never depends on the build machine's locale.
+    return f"{MONTHS[d.month - 1]} {d.day}, {d.year}"
 
 
 def series_label(p: Page) -> str:
-    return f"{e(p.series)} · 第 {p.series_part} 篇" if p.series and p.series_part else ""
+    return f"{e(p.series)} · Part {p.series_part}" if p.series and p.series_part else ""
 
 
 def render_home(posts: list[Page]) -> str:
@@ -234,7 +241,7 @@ def render_series_box(post: Page, posts: list[Page]) -> str:
         else:
             rows.append(f'<li><a href="{p.url}">{e(p.title)}</a></li>')
     return f"""<aside class="series">
-<div class="label">系列：{e(post.series)}</div>
+<div class="label">Series: {e(post.series)}</div>
 <ol>{''.join(rows)}</ol>
 </aside>"""
 
@@ -253,7 +260,7 @@ def render_post(post: Page, posts: list[Page]) -> str:
 </div>
 </article>
 {render_series_box(post, posts)}
-<div class="post-footer"><a href="/">&larr; 所有文章</a></div>
+<div class="post-footer"><a href="/">&larr; All posts</a></div>
 </main>"""
     return layout(title=post.title, description=post.summary, path=post.url,
                   body=body, og_type="article")
@@ -270,7 +277,7 @@ def render_about(page: Page) -> str:
 </article>
 </main>"""
     return layout(title=page.title, description=page.meta.get("summary") or SITE["description"],
-                  path=page.url, body=body, lang=page.meta.get("lang", "en"))
+                  path=page.url, body=body)
 
 
 def render_404() -> str:
@@ -281,7 +288,7 @@ def render_404() -> str:
 <p><a href="/">&larr; Back to the homepage</a></p>
 </main>"""
     return layout(title="Page not found", description=SITE["description"], path="/404.html",
-                  body=body, lang="en")
+                  body=body)
 
 
 def render_atom(posts: list[Page]) -> str:

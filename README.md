@@ -26,8 +26,8 @@ Add `src/content/posts/<slug>.md`:
 title: Post title
 date: 2026-11-16
 summary: One or two sentences for the homepage, RSS and link previews.
-series: 项目复盘        # optional
-series_part: 2          # optional
+series: Project retrospectives   # optional
+series_part: 2                   # optional
 draft: true             # optional, skips the post
 ---
 
