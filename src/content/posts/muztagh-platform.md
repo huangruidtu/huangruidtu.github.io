@@ -98,4 +98,4 @@ In the upgrade I added tools and then discovered the ownership problem. Here I s
 
 ## Next
 
-Next is a different domain: a data engineering lab with batch and CDC pipelines, built first as a hybrid stack and then again on AWS.
+Next is a different domain: [a data engineering lab](/posts/data-pipeline-lab/) with batch and CDC pipelines, built first as a hybrid stack and then again on AWS.
