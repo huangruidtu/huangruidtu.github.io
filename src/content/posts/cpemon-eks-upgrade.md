@@ -64,4 +64,4 @@ Installing components turned out to be the easy part of a platform. Drawing owne
 
 ## Next
 
-Next is Muztagh: taking the platform out of the application, and running it as a separate product for the teams that build on it.
+Next is [Muztagh](/posts/muztagh-platform/): taking the platform out of the application, and running it as a separate product for the teams that build on it.
