@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://huangruidtu.github.io/sitemap.xml
