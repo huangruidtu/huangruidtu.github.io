@@ -69,6 +69,8 @@ The most interesting shortcut is the queue. Kafka would have been the natural ch
 
 Webhooks are signed with HMAC-SHA256 and compared in constant time. Every failure path increments a labeled Prometheus counter (`invalid_json`, `missing_sn`, `invalid_signature`), so the dashboard shows *why* requests fail, not just that they do.
 
+Not all of it was finished. The retry and dead-letter path exists in the schema and code but isn't wired into the writer yet, and heartbeats skip the queue entirely, so the backlog demo (which sends heartbeats) never actually fills it. Signatures are also only checked when a webhook carries the header.
+
 ## Break it on purpose
 
 The part I'm happiest with is that failure is part of the demo, not something I hope doesn't happen during it.
@@ -80,13 +82,6 @@ The part I'm happiest with is that failure is part of the demo, not something I 
 Security got the same layered treatment: the admin UI sits behind Basic Auth *and* an ingress IP allowlist, and Calico network policies default-deny egress in the namespace, so only the core services can reach MySQL, Prometheus and Elasticsearch.
 
 The admin UI ties it together for an operator: search a device by serial number, see its current state and history, then jump to its metrics in Grafana and its logs in Kibana. A device ID to the evidence in a few clicks.
-
-## Where the MVP stopped
-
-In the spirit of saying what was proven and what wasn't:
-
-- The writer's retry and dead-letter path is modeled in the schema and the code, but in the MVP the writer only claims and acknowledges events. Heartbeats are written straight to the state tables by `cpemon-api`.
-- Signature checks run only when a webhook carries a signature header. Unsigned requests are still accepted, which was convenient during development and is not something to keep.
 
 ## What it taught me
 

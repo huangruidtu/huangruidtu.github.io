@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Rui Huang</title>
-  <subtitle>Rui Huang, platform and data engineer in Copenhagen. Notes on platforms, data pipelines, and what happens when they break.</subtitle>
+  <subtitle>Rui Huang&#x27;s notes on platforms, data, and the things in between.</subtitle>
   <link href="https://huangruidtu.github.io/atom.xml" rel="self"/>
   <link href="https://huangruidtu.github.io/"/>
   <id>https://huangruidtu.github.io/</id>
@@ -94,6 +94,7 @@ Velero + MinIO/S3        namespace backups, MySQL dumps
 &lt;li&gt;&lt;strong&gt;Retries and dead letters.&lt;/strong&gt; Each row has &lt;code&gt;attempts&lt;/code&gt;, &lt;code&gt;next_at&lt;/code&gt;, and a &lt;code&gt;dead&lt;/code&gt; state, with exponential backoff from 5 seconds up to 5 minutes and five attempts before giving up.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Webhooks are signed with HMAC-SHA256 and compared in constant time. Every failure path increments a labeled Prometheus counter (&lt;code&gt;invalid_json&lt;/code&gt;, &lt;code&gt;missing_sn&lt;/code&gt;, &lt;code&gt;invalid_signature&lt;/code&gt;), so the dashboard shows &lt;em&gt;why&lt;/em&gt; requests fail, not just that they do.&lt;/p&gt;
+&lt;p&gt;Not all of it was finished. The retry and dead-letter path exists in the schema and code but isn&#x27;t wired into the writer yet, and heartbeats skip the queue entirely, so the backlog demo (which sends heartbeats) never actually fills it. Signatures are also only checked when a webhook carries the header.&lt;/p&gt;
 &lt;h2 id=&quot;break-it-on-purpose&quot;&gt;Break it on purpose&lt;a class=&quot;headerlink&quot; href=&quot;#break-it-on-purpose&quot; title=&quot;Link to this section&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The part I&#x27;m happiest with is that failure is part of the demo, not something I hope doesn&#x27;t happen during it.&lt;/p&gt;
 &lt;ul&gt;
@@ -103,12 +104,6 @@ Velero + MinIO/S3        namespace backups, MySQL dumps
 &lt;/ul&gt;
 &lt;p&gt;Security got the same layered treatment: the admin UI sits behind Basic Auth &lt;em&gt;and&lt;/em&gt; an ingress IP allowlist, and Calico network policies default-deny egress in the namespace, so only the core services can reach MySQL, Prometheus and Elasticsearch.&lt;/p&gt;
 &lt;p&gt;The admin UI ties it together for an operator: search a device by serial number, see its current state and history, then jump to its metrics in Grafana and its logs in Kibana. A device ID to the evidence in a few clicks.&lt;/p&gt;
-&lt;h2 id=&quot;where-the-mvp-stopped&quot;&gt;Where the MVP stopped&lt;a class=&quot;headerlink&quot; href=&quot;#where-the-mvp-stopped&quot; title=&quot;Link to this section&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;In the spirit of saying what was proven and what wasn&#x27;t:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The writer&#x27;s retry and dead-letter path is modeled in the schema and the code, but in the MVP the writer only claims and acknowledges events. Heartbeats are written straight to the state tables by &lt;code&gt;cpemon-api&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Signature checks run only when a webhook carries a signature header. Unsigned requests are still accepted, which was convenient during development and is not something to keep.&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&quot;what-it-taught-me&quot;&gt;What it taught me&lt;a class=&quot;headerlink&quot; href=&quot;#what-it-taught-me&quot; title=&quot;Link to this section&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Running every layer myself was the fastest way to learn what each layer costs. Elasticsearch needs disk and attention. A database queue works until it doesn&#x27;t. A single control plane is a single point of failure whatever the replica count says.&lt;/p&gt;
 &lt;p&gt;It also made the next question obvious: how much of this would I still want to run myself if I didn&#x27;t have to?&lt;/p&gt;

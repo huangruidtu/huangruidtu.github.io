@@ -30,12 +30,9 @@ from pygments.formatters import HtmlFormatter
 SITE = {
     "url": "https://huangruidtu.github.io",
     "title": "Rui Huang",
-    "tagline": "Platform and data engineer in Copenhagen. I build the plumbing between "
-               "\u201csomething happened\u201d and \u201csomeone can act on it\u201d: platforms, "
-               "pipelines, and the alerts for when either breaks.",
-    "subline": "Started in kernel space; now I live in the control plane.",
-    "description": "Rui Huang, platform and data engineer in Copenhagen. Notes on "
-                   "platforms, data pipelines, and what happens when they break.",
+    "tagline": "Notes on platforms, data, and the things in between.",
+    "subline": "From segmentation fault to service not found.",
+    "description": "Rui Huang's notes on platforms, data, and the things in between.",
     "author": "Rui Huang",
     "motto": "Ctrl + Alt + Solve",
     "since": 2020,

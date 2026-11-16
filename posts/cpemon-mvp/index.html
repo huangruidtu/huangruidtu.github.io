@@ -113,6 +113,7 @@ Velero + MinIO/S3        namespace backups, MySQL dumps
 <li><strong>Retries and dead letters.</strong> Each row has <code>attempts</code>, <code>next_at</code>, and a <code>dead</code> state, with exponential backoff from 5 seconds up to 5 minutes and five attempts before giving up.</li>
 </ul>
 <p>Webhooks are signed with HMAC-SHA256 and compared in constant time. Every failure path increments a labeled Prometheus counter (<code>invalid_json</code>, <code>missing_sn</code>, <code>invalid_signature</code>), so the dashboard shows <em>why</em> requests fail, not just that they do.</p>
+<p>Not all of it was finished. The retry and dead-letter path exists in the schema and code but isn't wired into the writer yet, and heartbeats skip the queue entirely, so the backlog demo (which sends heartbeats) never actually fills it. Signatures are also only checked when a webhook carries the header.</p>
 <h2 id="break-it-on-purpose">Break it on purpose<a class="headerlink" href="#break-it-on-purpose" title="Link to this section">#</a></h2>
 <p>The part I'm happiest with is that failure is part of the demo, not something I hope doesn't happen during it.</p>
 <ul>
@@ -122,12 +123,6 @@ Velero + MinIO/S3        namespace backups, MySQL dumps
 </ul>
 <p>Security got the same layered treatment: the admin UI sits behind Basic Auth <em>and</em> an ingress IP allowlist, and Calico network policies default-deny egress in the namespace, so only the core services can reach MySQL, Prometheus and Elasticsearch.</p>
 <p>The admin UI ties it together for an operator: search a device by serial number, see its current state and history, then jump to its metrics in Grafana and its logs in Kibana. A device ID to the evidence in a few clicks.</p>
-<h2 id="where-the-mvp-stopped">Where the MVP stopped<a class="headerlink" href="#where-the-mvp-stopped" title="Link to this section">#</a></h2>
-<p>In the spirit of saying what was proven and what wasn't:</p>
-<ul>
-<li>The writer's retry and dead-letter path is modeled in the schema and the code, but in the MVP the writer only claims and acknowledges events. Heartbeats are written straight to the state tables by <code>cpemon-api</code>.</li>
-<li>Signature checks run only when a webhook carries a signature header. Unsigned requests are still accepted, which was convenient during development and is not something to keep.</li>
-</ul>
 <h2 id="what-it-taught-me">What it taught me<a class="headerlink" href="#what-it-taught-me" title="Link to this section">#</a></h2>
 <p>Running every layer myself was the fastest way to learn what each layer costs. Elasticsearch needs disk and attention. A database queue works until it doesn't. A single control plane is a single point of failure whatever the replica count says.</p>
 <p>It also made the next question obvious: how much of this would I still want to run myself if I didn't have to?</p>

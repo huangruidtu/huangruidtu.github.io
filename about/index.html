@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About · Rui Huang</title>
-<meta name="description" content="Rui Huang is a platform and data engineer in Copenhagen. Platforms, pipelines, and the alerts for when either breaks.">
+<meta name="description" content="Rui Huang. From segmentation fault to service not found.">
 <meta name="author" content="Rui Huang">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://huangruidtu.github.io/about/">
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/assets/style.css">
 <meta property="og:site_name" content="Rui Huang">
 <meta property="og:title" content="About">
-<meta property="og:description" content="Rui Huang is a platform and data engineer in Copenhagen. Platforms, pipelines, and the alerts for when either breaks.">
+<meta property="og:description" content="Rui Huang. From segmentation fault to service not found.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://huangruidtu.github.io/about/">
 <meta property="og:image" content="https://huangruidtu.github.io/assets/psyduck-512.jpg">
@@ -30,34 +30,11 @@
 <article>
 <header class="post-header"><h1>About</h1></header>
 <div class="prose">
-<p>I'm Rui, a platform and data engineer in Copenhagen.</p>
-<p>Most of what I do sits between “something happened” and “someone can act on it”. Devices, services and databases emit a constant stream of events. My job is getting that stream somewhere useful, keeping it correct on the way, and keeping the platform underneath it boring. Device telemetry, business analytics, CI/CD: it's the same shape of problem every time, just with different nouns.</p>
-<p>I got here the long way round: Linux kernel drivers for smartphones, then an MSc in Computer Science and Engineering at DTU (with some Bluetooth firmware for hearing-aid accessories on the side), then infrastructure. From <code>segmentation fault</code> to <code>service not found</code>, with the occasional <code>consumer lag</code> these days.</p>
-<p>Officially certified, too: CKA and AWS Certified Solutions Architect – Associate.</p>
-<h2 id="what-i-reach-for">What I reach for<a class="headerlink" href="#what-i-reach-for" title="Link to this section">#</a></h2>
-<ul>
-<li><strong>Keeping platforms up:</strong> Kubernetes, Terraform, Helm, Argo CD, and a lot of AWS</li>
-<li><strong>Moving data around:</strong> Kafka, ClickHouse, Airflow, Spark, Flink, Debezium, dbt, Snowflake</li>
-<li><strong>Finding out why it broke:</strong> Prometheus, Grafana, Loki, and the ELK stack</li>
-<li><strong>Writing the actual code:</strong> Go, Python, Rust, C, and more Bash than I'd like to admit</li>
-</ul>
-<h2 id="whats-on-this-site">What's on this site<a class="headerlink" href="#whats-on-this-site" title="Link to this section">#</a></h2>
-<p>I build side projects to try ideas end to end, then write up how they went: what I built, why it ended up that way, and what I'd change. Roughly in the order my thinking evolved:</p>
-<ul>
-<li><strong><a href="https://github.com/huangruidtu/edge-ci-cd-demo">edge-ci-cd-demo</a></strong>: CI/CD for a C++ app on an ARM board in a private LAN. Layered DevSecOps checks, versioned binaries in S3, delivery through a self-hosted runner, manual rollback. <a href="/posts/edge-ci-cd/">Write-up</a>.</li>
-<li><strong><a href="https://github.com/huangruidtu/cpemon-mvp">cpemon-mvp</a></strong>: a telemetry platform for home routers (CPEs) on a Kubernetes cluster I ran myself. Go services, a MySQL-backed queue, Prometheus and Grafana, Elasticsearch and Kibana, Velero for backup and restore. <a href="/posts/cpemon-mvp/">Write-up</a>.</li>
-<li><strong><a href="https://github.com/huangruidtu/aws-cpemon-lite">aws-cpemon-lite</a></strong>: the same problem built only from AWS managed services: API Gateway, Lambda, DynamoDB, S3, CloudWatch alarms and SNS, with a small cost guardrail.</li>
-<li><strong><a href="https://github.com/huangruidtu/cpemon-mvp/tree/codex/cpemon-cloud-platform-upgrade">CPEmon cloud platform upgrade</a></strong>: the MVP moved to EKS with Terraform, Helm, Kafka, Argo CD, External Secrets, Kyverno, OpenCost and Crossplane.</li>
-<li><strong><a href="https://github.com/huangruidtu/Muztagh-Developer-Platform">Muztagh Developer Platform</a></strong>: the platform pieces pulled out of that upgrade into a central internal developer platform. Terraform owns the foundation, Crossplane exposes <code>Workspace</code>, <code>Application</code> and <code>DataStore</code> contracts, and CPEmon is the first tenant.</li>
-<li><strong><a href="https://github.com/huangruidtu/multi-source-data-engineering-pipeline-lab">Multi-source data engineering lab</a></strong>: batch and CDC pipelines with Airflow, Spark, Debezium, Kafka, Flink, Iceberg, Snowflake and dbt, plus an AWS-native version.</li>
-</ul>
-<p>The later repositories state plainly what was actually run and what was only designed or validated offline.</p>
-<h2 id="outside-work">Outside work<a class="headerlink" href="#outside-work" title="Link to this section">#</a></h2>
-<p>Basketball, hiking, football, and Liverpool FC.</p>
-<h2 id="the-duck">The duck<a class="headerlink" href="#the-duck" title="Link to this section">#</a></h2>
-<p>That's Psyduck: a bit slow, always slightly confused, gets there in the end. Felt right.</p>
-<h2 id="elsewhere">Elsewhere<a class="headerlink" href="#elsewhere" title="Link to this section">#</a></h2>
-<p><a href="https://github.com/huangruidtu">GitHub</a> · <a href="https://www.linkedin.com/in/rui-huang-314a50168/">LinkedIn</a> · <a href="/atom.xml">RSS</a></p>
+<p>I'm Rui.</p>
+<p>I started out writing C, close to the hardware. These days I work on platforms, and on the data that moves through them.</p>
+<p>From <code>segmentation fault</code> to <code>service not found</code>. <code>--progress?</code></p>
+<p>This is where I write things down.</p>
+<p><a href="https://github.com/huangruidtu">GitHub</a> · <a href="https://www.linkedin.com/in/rui-huang-314a50168/">LinkedIn</a></p>
 </div>
 </article>
 </main>
