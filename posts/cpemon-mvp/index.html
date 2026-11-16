@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Build it, break it, bring it back: a telemetry platform on a cluster I ran myself · Rui Huang</title>
-<meta name="description" content="A CPE monitoring platform built end to end on a self-managed Kubernetes lab: every layer mine, every shortcut written down, and every failure rehearsed on purpose.">
+<title>A telemetry platform on a cluster I ran myself · Rui Huang</title>
+<meta name="description" content="A CPE monitoring platform built end to end on a self-managed Kubernetes lab, with every shortcut written down and failures rehearsed on purpose.">
 <meta name="author" content="Rui Huang">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://huangruidtu.github.io/posts/cpemon-mvp/">
@@ -13,8 +13,8 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/style.css">
 <meta property="og:site_name" content="Rui Huang">
-<meta property="og:title" content="Build it, break it, bring it back: a telemetry platform on a cluster I ran myself">
-<meta property="og:description" content="A CPE monitoring platform built end to end on a self-managed Kubernetes lab: every layer mine, every shortcut written down, and every failure rehearsed on purpose.">
+<meta property="og:title" content="A telemetry platform on a cluster I ran myself">
+<meta property="og:description" content="A CPE monitoring platform built end to end on a self-managed Kubernetes lab, with every shortcut written down and failures rehearsed on purpose.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://huangruidtu.github.io/posts/cpemon-mvp/">
 <meta property="og:image" content="https://huangruidtu.github.io/assets/psyduck-512.jpg">
@@ -29,13 +29,12 @@
 <main>
 <article>
 <header class="post-header">
-<h1>Build it, break it, bring it back: a telemetry platform on a cluster I ran myself</h1>
-<div class="meta"><time datetime="2026-11-16">Nov 16, 2026 · Project retrospectives · Part 2</time></div>
+<h1>A telemetry platform on a cluster I ran myself</h1>
+<div class="meta"><time datetime="2026-11-16">Nov 16, 2026</time></div>
 </header>
 <div class="prose">
 <blockquote>
-<p>Part 2 of a series of project retrospectives. One post per project, roughly in the order my thinking evolved: what I built, why it ended up that way, and what I'd do differently.</p>
-<p>Code: <a href="https://github.com/huangruidtu/cpemon-mvp">huangruidtu/cpemon-mvp</a></p>
+<p>One post in a series of project retrospectives. Code: <a href="https://github.com/huangruidtu/cpemon-mvp">huangruidtu/cpemon-mvp</a></p>
 </blockquote>
 <p><strong>TL;DR:</strong> A lab-scale monitoring platform for home routers (CPEs), built end to end on a two-node kubeadm cluster. Simulated devices and a TR-069 server (GenieACS) feed three Go services; MySQL holds the state and doubles as a queue; Prometheus, Grafana, Elasticsearch and Kibana watch it; Velero backs it up. Six decision records explain every shortcut, and the demos break things on purpose and bring them back.</p>
 <h2 id="why-build-it">Why build it<a class="headerlink" href="#why-build-it" title="Link to this section">#</a></h2>
@@ -132,7 +131,7 @@ Velero + MinIO/S3        namespace backups, MySQL dumps
 </article>
 <aside class="series">
 <div class="label">Series: Project retrospectives</div>
-<ol><li><a href="/posts/edge-ci-cd/">Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective</a></li><li class="current">Build it, break it, bring it back: a telemetry platform on a cluster I ran myself</li></ol>
+<ol><li><a href="/posts/edge-ci-cd/">An edge CI/CD retrospective</a></li><li class="current">A telemetry platform on a cluster I ran myself</li></ol>
 </aside>
 <div class="post-footer"><a href="/">&larr; All posts</a></div>
 </main>

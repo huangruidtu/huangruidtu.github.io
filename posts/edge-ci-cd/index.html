@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective · Rui Huang</title>
+<title>An edge CI/CD retrospective · Rui Huang</title>
 <meta name="description" content="My first attempt at treating delivery as one whole problem: layered DevSecOps checks, a self-hosted runner inside a private LAN, versioned artifacts in S3, and a manual rollback.">
 <meta name="author" content="Rui Huang">
 <meta name="color-scheme" content="light dark">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/style.css">
 <meta property="og:site_name" content="Rui Huang">
-<meta property="og:title" content="Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective">
+<meta property="og:title" content="An edge CI/CD retrospective">
 <meta property="og:description" content="My first attempt at treating delivery as one whole problem: layered DevSecOps checks, a self-hosted runner inside a private LAN, versioned artifacts in S3, and a manual rollback.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://huangruidtu.github.io/posts/edge-ci-cd/">
@@ -29,13 +29,12 @@
 <main>
 <article>
 <header class="post-header">
-<h1>Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective</h1>
-<div class="meta"><time datetime="2026-11-16">Nov 16, 2026 · Project retrospectives · Part 1</time></div>
+<h1>An edge CI/CD retrospective</h1>
+<div class="meta"><time datetime="2026-11-16">Nov 16, 2026</time></div>
 </header>
 <div class="prose">
 <blockquote>
-<p>Part 1 of a series of project retrospectives. One post per project, roughly in the order my thinking evolved: what I built, why it ended up that way, and what I'd do differently.</p>
-<p>Code: <a href="https://github.com/huangruidtu/edge-ci-cd-demo">huangruidtu/edge-ci-cd-demo</a></p>
+<p>One post in a series of project retrospectives. Code: <a href="https://github.com/huangruidtu/edge-ci-cd-demo">huangruidtu/edge-ci-cd-demo</a></p>
 </blockquote>
 <p><strong>TL;DR:</strong> A GitHub Actions pipeline for a C++ app on an ARM board behind a private LAN. Layered checks (cppcheck, Trivy) run on every pull request and fail on high-severity findings. Release tags build a versioned binary on a self-hosted runner, publish it to S3 and deploy it over SSH. Rollback is a manual workflow that redeploys any earlier version from S3.</p>
 <p>I started here because this was the first time I treated delivery as a whole problem, rather than as a workflow file that turns green.</p>
@@ -149,7 +148,7 @@ tag --------------&gt; self-hosted runner (inside the LAN)
 </article>
 <aside class="series">
 <div class="label">Series: Project retrospectives</div>
-<ol><li class="current">Shipping to a box you can&#x27;t reach: an edge CI/CD retrospective</li><li><a href="/posts/cpemon-mvp/">Build it, break it, bring it back: a telemetry platform on a cluster I ran myself</a></li></ol>
+<ol><li class="current">An edge CI/CD retrospective</li><li><a href="/posts/cpemon-mvp/">A telemetry platform on a cluster I ran myself</a></li></ol>
 </aside>
 <div class="post-footer"><a href="/">&larr; All posts</a></div>
 </main>

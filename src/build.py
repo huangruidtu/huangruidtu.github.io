@@ -39,7 +39,7 @@ SITE = {
     "links": [
         ("GitHub", "https://github.com/huangruidtu"),
         ("LinkedIn", "https://www.linkedin.com/in/rui-huang-314a50168/"),
-        ("RSS", "/atom.xml"),
+        ("Email", "mailto:huangruitjut@gmail.com"),
     ],
 }
 
@@ -197,15 +197,11 @@ def fmt_date(d: dt.date) -> str:
     return f"{MONTHS[d.month - 1]} {d.day}, {d.year}"
 
 
-def series_label(p: Page) -> str:
-    return f"{e(p.series)} · Part {p.series_part}" if p.series and p.series_part else ""
-
-
 def render_home(posts: list[Page]) -> str:
     links = "".join(f'<a href="{e(url)}">{e(name)}</a>' for name, url in SITE["links"])
     items = []
     for p in posts:
-        meta = fmt_date(p.date) + (f" · {series_label(p)}" if series_label(p) else "")
+        meta = fmt_date(p.date)
         items.append(f"""<li>
 <div class="meta"><time datetime="{p.date.isoformat()}">{meta}</time></div>
 <h2><a href="{p.url}">{e(p.title)}</a></h2>
@@ -245,7 +241,7 @@ def render_series_box(post: Page, posts: list[Page]) -> str:
 
 
 def render_post(post: Page, posts: list[Page]) -> str:
-    meta = fmt_date(post.date) + (f" · {series_label(post)}" if series_label(post) else "")
+    meta = fmt_date(post.date)
     body = f"""{topbar()}
 <main>
 <article>

@@ -11,4 +11,4 @@ From `segmentation fault` to `service not found`. `--progress?`
 
 This is where I write things down.
 
-[GitHub](https://github.com/huangruidtu) · [LinkedIn](https://www.linkedin.com/in/rui-huang-314a50168/)
+[GitHub](https://github.com/huangruidtu) · [LinkedIn](https://www.linkedin.com/in/rui-huang-314a50168/) · [huangruitjut@gmail.com](mailto:huangruitjut@gmail.com)

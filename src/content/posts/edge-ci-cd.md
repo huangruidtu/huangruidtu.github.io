@@ -1,14 +1,12 @@
 ---
-title: Shipping to a box you can't reach: an edge CI/CD retrospective
+title: An edge CI/CD retrospective
 date: 2026-11-16
 summary: My first attempt at treating delivery as one whole problem: layered DevSecOps checks, a self-hosted runner inside a private LAN, versioned artifacts in S3, and a manual rollback.
 series: Project retrospectives
 series_part: 1
 ---
 
-> Part 1 of a series of project retrospectives. One post per project, roughly in the order my thinking evolved: what I built, why it ended up that way, and what I'd do differently.
->
-> Code: [huangruidtu/edge-ci-cd-demo](https://github.com/huangruidtu/edge-ci-cd-demo)
+> One post in a series of project retrospectives. Code: [huangruidtu/edge-ci-cd-demo](https://github.com/huangruidtu/edge-ci-cd-demo)
 
 **TL;DR:** A GitHub Actions pipeline for a C++ app on an ARM board behind a private LAN. Layered checks (cppcheck, Trivy) run on every pull request and fail on high-severity findings. Release tags build a versioned binary on a self-hosted runner, publish it to S3 and deploy it over SSH. Rollback is a manual workflow that redeploys any earlier version from S3.
 

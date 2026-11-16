@@ -1,14 +1,12 @@
 ---
-title: Build it, break it, bring it back: a telemetry platform on a cluster I ran myself
+title: A telemetry platform on a cluster I ran myself
 date: 2026-11-16
-summary: A CPE monitoring platform built end to end on a self-managed Kubernetes lab: every layer mine, every shortcut written down, and every failure rehearsed on purpose.
+summary: A CPE monitoring platform built end to end on a self-managed Kubernetes lab, with every shortcut written down and failures rehearsed on purpose.
 series: Project retrospectives
 series_part: 2
 ---
 
-> Part 2 of a series of project retrospectives. One post per project, roughly in the order my thinking evolved: what I built, why it ended up that way, and what I'd do differently.
->
-> Code: [huangruidtu/cpemon-mvp](https://github.com/huangruidtu/cpemon-mvp)
+> One post in a series of project retrospectives. Code: [huangruidtu/cpemon-mvp](https://github.com/huangruidtu/cpemon-mvp)
 
 **TL;DR:** A lab-scale monitoring platform for home routers (CPEs), built end to end on a two-node kubeadm cluster. Simulated devices and a TR-069 server (GenieACS) feed three Go services; MySQL holds the state and doubles as a queue; Prometheus, Grafana, Elasticsearch and Kibana watch it; Velero backs it up. Six decision records explain every shortcut, and the demos break things on purpose and bring them back.
 
